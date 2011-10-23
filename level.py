@@ -35,16 +35,18 @@ class level(object):
         self._holes_progress[(x, y)] += 1
       except KeyError:
         self._holes_progress[(x, y)] = 0
-        
-      print "Placed hole at %d, %d" % (x,y)
-    else:
-      print "No hole placed"
     
-    for k, v in self._holes_progress:
+    items_to_delete = []
+    
+    for k, v in self._holes_progress.iteritems():
       v += 1
       if v >= 3:
+        print k
         self._holes[k[0]][k[1]] = True
-        del self._holes_progress[k]
+        items_to_delete.append(k)
+    
+    for i in items_to_delete:
+      del self._holes_progress[i]
 
   def placeObstacle(self, x, y):
     self._obstacles[x][y] = True
