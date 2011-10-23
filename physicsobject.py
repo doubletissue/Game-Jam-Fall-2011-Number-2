@@ -67,7 +67,7 @@ class PhysicsObject(object):
       selfdy = -(selfdy + otherdy)/2
     elif intersection == "bottom":
       #self.next_y = other.y - 16
-      selfdy = -(selfdy + otherdy)/2
+      selfdy = (selfdy + otherdy)/2
     elif intersection == "left":
       #self.next_x = other.x - 16
       selfdx = -(selfdx + otherdx)/2
