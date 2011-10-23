@@ -1,9 +1,6 @@
 from __future__ import division
 import random
 
-# Christian Johnson
-# Christopher Thomas
-
 #GLOBAL VARS
 PROB_HOLES = .7
 
@@ -53,6 +50,9 @@ class level(object):
 
   def getState(self):
     return (self._obstacles, self._holes, self._holes_progress)
+
+  def draw(self, screen):
+    pass
 
   def collision(self, x, y):
     if self._obstacles[x][y] or self._holes[x][y]:
