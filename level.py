@@ -94,11 +94,11 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    start_x = x / 4
-    start_y = y / 4
+    start_x = (x / 4) - 1
+    start_y = (y / 4) - 1
     obj_list = []
-    for i in range(0, 2):
-      for j in range(0, 2):
+    for i in range(0, 4):
+      for j in range(0, 4):
         if self._obstacles[start_x + i][start_y + j]:
           collision_x = (start_x + i) * 4
           collision_y = (start_y + j) * 4
