@@ -82,7 +82,7 @@ class PhysicsObject(object):
 
   def isBelow( self, other, updated=False ):
     if updated == True:
-      return self.next_top < other.next_bottom
+      return self.next_top > other.next_bottom
     return self.top > other.bottom
 
   def isLeft( self, other, updated=False ):
@@ -92,7 +92,7 @@ class PhysicsObject(object):
 
   def isRight( self, other, updated=False ):
     if updated == True:
-      return self.next_left < other.next_right
+      return self.next_left > other.next_right
     return self.left > other.right
 
   def intersect( self, other ):
