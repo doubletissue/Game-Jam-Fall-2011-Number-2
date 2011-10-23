@@ -128,22 +128,22 @@ class PhysicsObject(object):
     return self.left > other.right
 
   def intersect( self, other ):
-    print self.isAbove( other, True ), self.isBelow( other, True ), self.isLeft( other, True ), self.isRight( other, True )
-    print self.next_right, other.next_right
+    #print self.isAbove( other, True ), self.isBelow( other, True ), self.isLeft( other, True ), self.isRight( other, True )
+    #print self.next_right, other.next_right
     #print not self.isAbove( other, True ) and not self.isBelow( other, True ) and not self.isLeft( other, True ) and not self.isRight( other, True )
     if not self.isAbove( other, True ) and not self.isBelow( other, True ) and not self.isLeft( other, True ) and not self.isRight( other, True ):
-      print "Collision"
+      #print "Collision"
       if self.isAbove( other ):
-        print "top"
+        #print "top"
         return "top"
       elif self.isBelow( other ):
-        print "bottom"
+        #print "bottom"
         return "bottom"
       elif self.isLeft( other ):
-        print "left"
+        #print "left"
         return "left"
       elif self.isRight( other ):
-        print "right"
+        #print "right"
         return "right"
     else:
       return None
