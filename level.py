@@ -3,7 +3,7 @@ import random
 import math
 
 #GLOBAL VARS
-PROB_HOLES = .3
+PROB_HOLES = .1
 OBSTACLE_TYPE = 4
 HOLE_TYPE = 3
 NORMAL_TYPE = 0

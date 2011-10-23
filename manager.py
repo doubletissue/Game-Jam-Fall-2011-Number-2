@@ -9,7 +9,7 @@ from player import Player
 from physicsobject import PhysicsObject
 
 
-floor_image   = pygame.image.load(os.path.join("Art","ground_0.png"))
+floor_image   = pygame.image.load(os.path.join("Art","ground_3.png"))
 wall_image    = pygame.image.load(os.path.join("Art","wall.png"    ))
 rock_image    = pygame.image.load(os.path.join("Art","rock.png"    ))
 player_image  = pygame.image.load(os.path.join("Art","viking_0.png"    ))
@@ -23,8 +23,14 @@ player_keymap = [
                     K_d: 'right'
                   },
                   
+                  { K_g: 'up',
+                    K_v: 'left',
+                    K_b: 'down',
+                    K_n: 'right'
+                  },
+                  
                   { K_i: 'up',
-                    K_j: 'left',
+                    K_j: 'left', 
                     K_k: 'down',
                     K_l: 'right'
                   },
@@ -33,12 +39,6 @@ player_keymap = [
                     K_LEFT : 'left',
                     K_DOWN : 'down',
                     K_RIGHT: 'right'
-                  },
-                  
-                  { K_KP5: 'up',
-                    K_KP1: 'left', 
-                    K_KP2: 'down',
-                    K_KP3: 'right'
                   }
                 ]
 
