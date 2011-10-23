@@ -13,7 +13,7 @@ class level(object):
         self._holes[i].append([])
         self._obstacles[i][j] = False
         self._holes[i][j] = False
-    for i in range(127):
+    for i in range(128):
       self.placeObstacle(0, i)
       self.placeObstacle(127, i)
       self.placeObstacle(i, 0)
