@@ -22,7 +22,7 @@ class PhysicsObject(object):
     self.update_edges()
 
   def __str__( self ):
-    return "x: {}, y: {}; vmag: {}, varg: {}".format( self.x, self.y, self.vmag, self.varg)
+    return "x: {0}, y: {1}; vmag: {2}, varg: {3}".format( self.x, self.y, self.vmag, self.varg)
 
   def start_update( self, a, darg ):
     self.next_varg = (self.varg + darg) % (2*math.pi)
