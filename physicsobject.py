@@ -59,6 +59,8 @@ class PhysicsObject(object):
     if intersection == None:
       return
 
+    print intersection
+
     self.next_x = self.x
     self.next_y = self.y
 
