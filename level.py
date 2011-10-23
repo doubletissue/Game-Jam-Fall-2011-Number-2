@@ -112,6 +112,5 @@ class level(object):
             collision_y = (start_y + j) * 4
             obj_list.append((collision_x, collision_y, HOLE_TYPE))
         except IndexError:
-          print "IndexError"
           pass
     return obj_list
