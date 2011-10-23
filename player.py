@@ -9,4 +9,4 @@ class Player(PhysicsObject):
     pass
 
   def update_physics( self, physicsobjects ):
-    
+    pass
