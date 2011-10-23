@@ -15,11 +15,13 @@ def main():
   game_manager = Manager()
   
   while True:
+    clock.tick(30)
     for e in pygame.event.get():
       if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
         pygame.quit()
         return
     keys = pygame.key.get_pressed()
+    game_manager.update(keys)
     game_manager.draw(screen)
     pygame.display.flip()
     
