@@ -3,6 +3,16 @@ import math
 
 MAX_VELOCITY = 25
 
+def polar_to_rect( arg, mag ):
+  return mag*math.cos(arg), mag*math.sin(arg)
+
+def rect_to_polar( x, y ):
+  mag = math.sqrt(x*x + y*y)
+  arg = math.atan2( y, x )
+  if x < 0:
+    arg = -arg
+  return mag, arg
+
 class PhysicsObject(object):
   def __init__( self, (x,y), (vmag,varg), (sizex,sizey) ):
     self.x, self.y = x,y
@@ -14,25 +24,33 @@ class PhysicsObject(object):
     return "x: {}, y: {}; vmag: {}, varg: {}; sizex: {}, sizey: {}".format( self.x, self.y, self.vmag, self.varg, self.sizex, self.sizey )
 
   def start_update( self, a, darg ):
-    self.next_varg = (self.varg + darg) % 2*math.pi
+    self.next_varg = (self.varg + darg) % (2*math.pi)
 
+    if a == 0:
+      a = -0.5
     self.next_vmag = self.vmag + a
     if self.next_vmag > MAX_VELOCITY:
       self.next_vmag = MAX_VELOCITY
     if self.next_vmag < 0:
       self.next_vmag = 0
 
-    self.next_x = self.next_vmag*math.cos(self.next_varg)
-    self.next_y = self.next_vmag*math.sin(self.next_varg)
+    self.next_x, self.next_y = polar_to_rect( self.next_vmag, self.next_varg )
+    self.next_x, self.next_y = self.next_x + self.x, self.next_y + self.y
 
   def update_bounce( self, other ):
+    selfdx, selfdy = polar_to_rect( self.vmag, self.varg )
+    otherdx, otherdy = polar_to_rect( other.vmag, other.varg )
+
     intersection = self.intersect( other )
+
     if intersection == None:
       return
     if intersection in ["top", "bottom"]:
-      self.next_dy = -(self.dy + other.dy)/2
+      selfdy = -(selfdy + otherdy)/2
     elif intersection in ["left", "right"]:
-      self.next_dx = -(self.dx + other.dx)/2
+      selfdx = -(selfdx + otherdx)/2
+
+    self.next_vmag, self.next_varg = rect_to_polar( selfdx, selfdy )
 
   def execute_update( self ):
     self.x = self.next_x

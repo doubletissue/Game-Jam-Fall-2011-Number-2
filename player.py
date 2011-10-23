@@ -32,9 +32,24 @@ class Player(PhysicsObject):
 if __name__ == "__main__":
   a = Player( None, (1,1) )
   print a
+  a.update_controls([])
+  a.execute_update()
+  print a
   a.update_controls( ["up"] )
   a.execute_update()
   print a
   a.update_controls( ["left"] )
   a.execute_update()
   print a
+
+  b = Player( None, (1,1) )
+  b.update_controls([])
+  b.execute_update()
+
+  print "COLLIDE"
+
+  for i in range(10):
+    a.update_controls([])
+    #a.update_physics([b])
+    a.execute_update()
+    print a
