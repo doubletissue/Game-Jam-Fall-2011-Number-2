@@ -58,12 +58,23 @@ class PhysicsObject(object):
 
     if intersection == None:
       return
-    if intersection in ["top", "bottom"]:
+    if intersection == "top":
+      self.y = other.y - 32
       selfdy = -(selfdy + otherdy)/2
-    elif intersection in ["left", "right"]:
+    elif intersection == "bottom":
+      self.y = other.y + 32
+      selfdy = -(selfdy + otherdy)/2
+    elif intersection == "left":
+      self.x = other.x - 32
+      selfdx = -(selfdx + otherdx)/2
+    elif intersection == "right":
+      self.x = other.x + 32
       selfdx = -(selfdx + otherdx)/2
 
     self.next_vmag, self.next_varg = rect_to_polar( selfdx, selfdy )
+
+    self.next_x, self.next_y = polar_to_rect( self.next_vmag, self.next_varg )
+    self.next_x, self.next_y = self.next_x + self.x, self.next_y + self.y
 
   def execute_update( self ):
     self.x = self.next_x
@@ -119,7 +130,7 @@ if __name__ == "__main__":
   a.start_update( 0, 0 )
   a.execute_update()
   print a
-  a.start_update( 1, 0  )
+  a.start_update( 1, 0 )
   a.execute_update()
   print a
   a.start_update( 0, math.pi )
