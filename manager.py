@@ -83,7 +83,6 @@ class Manager():
         if t == 3:
           p = PhysicsObject( (x+16,y+16), (0,0), (32,32) )
           q.append(p)
-          print "HOOOOOOOLE"
       player.update_physics( w )
       player.update_falling( q )
       

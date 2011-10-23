@@ -20,8 +20,10 @@ def main():
     screen.blit(title,(0,0))
     pygame.display.flip()
     for e in pygame.event.get():
-      if e.type == KEYDOWN:
-        b = False
+      pass
+    keys = pygame.key.get_pressed()
+    if keys[K_SPACE]:
+      break
   
   while True:
     clock.tick(30)
