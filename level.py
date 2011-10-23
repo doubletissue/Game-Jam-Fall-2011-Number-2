@@ -51,8 +51,37 @@ class level(object):
   def getState(self):
     return (self._obstacles, self._holes, self._holes_progress)
 
-  def draw(self, screen):
-    pass
+  def getContents(self, center, rotation):
+    result = {}
+    center_x = center[0]
+    center_y = center[1]
+    center_x_min = math.floor(center_x - 16*1.414)
+    if center_x_min < 0:
+      center_x_min = 0
+    center_x_max = math.ceil(center_x + 16*1.414)
+    if center_x_max > 127:
+      center_x_max = 127
+    center_y_min = math.floor(center_y - 16*1.414)
+    if center_y_min < 0:
+      center_y_min = 0
+    center_y_max = math.ceil(center_y + 16*1.414)
+    if center_y_max > 127:
+      center_y_max = 127
+    for x in range(int(center_x_min), int(center_x_max)):
+      for y in range(int(center_y_min), int(center_y_max)):
+        element_x = x - center_x
+        element_y = y - center_y
+        value = 0
+        if self._obstacles[x][y]:
+          value = 4
+        else if (x, y) in self._holes_progress:
+          value = self._holes_progress[(x, y)]
+        else if self._holes[x][y]:
+          value = 3
+        xprime = element_x * math.cos(rotation) - y * math.sin(rotation)
+        yprime = element_y * math.sin(rotation) + y * math.cos(rotation)
+        result[(xprime, yprime)] = value
+    return result
 
   def collision(self, x, y):
     if self._obstacles[x][y] or self._holes[x][y]:
