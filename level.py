@@ -1,4 +1,11 @@
 from __future__ import division
+import random
+
+# Christian Johnson
+# Christopher Thomas
+
+#GLOBAL VARS
+PROB_HOLES = .7
 
 class level(object):
   _obstacles = []
@@ -20,7 +27,11 @@ class level(object):
       self.placeObstacle(i, 127)
 
   def update(self):
-    pass
+    if random.random() < PROB_HOLES:
+      x = random.randint(0,127)
+      y = random.randint(0,127)
+      self._holes[x][y] = True
+      print "Placed hole at %d, %d" % (x,y)
 
   def placeObstacle(self, x, y):
     self._obstacles[x][y] = True
@@ -30,4 +41,3 @@ class level(object):
       return True
     else:
       return False
-
