@@ -118,13 +118,13 @@ class PhysicsObject(object):
         print "top"
         return "top"
       elif self.isBelow( other ):
-        print "top"
+        print "bottom"
         return "bottom"
       elif self.isLeft( other ):
-        print "top"
+        print "left"
         return "left"
       elif self.isRight( other ):
-        print "top"
+        print "right"
         return "right"
     else:
       return None
