@@ -94,8 +94,8 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    start_x = (x // 4) - 1
-    start_y = (y // 4) - 1
+    start_x = (int(x) // 4) - 1
+    start_y = (int(y) // 4) - 1
     obj_list = []
     for i in range(0, 4):
       for j in range(0, 4):
