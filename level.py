@@ -33,7 +33,7 @@ class level(object):
       
       try:
         self._holes_progress[(x, y)] += 1
-      catch KeyError:
+      except KeyError:
         self._holes_progress[(x, y)] = 0
         
       print "Placed hole at %d, %d" % (x,y)
