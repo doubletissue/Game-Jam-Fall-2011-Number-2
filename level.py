@@ -5,10 +5,10 @@ class level(object):
   _holes = []
 
   def __init__(self):
-    for i in range(127):
+    for i in range(128):
       self._obstacles.append([])
       self._holes.append([])
-      for j in range(127):
+      for j in range(128):
         self._obstacles[i].append([])
         self._holes[i].append([])
         self._obstacles[i][j] = False
