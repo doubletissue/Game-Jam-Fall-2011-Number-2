@@ -6,6 +6,7 @@ import sys,os
 
 from level import level
 from player import Player
+from physicsobject import PhysicsObject
 
 
 floor_image   = pygame.image.load(os.path.join("Art","ground_0.png"))
@@ -40,11 +41,12 @@ player_keymap = [
                 ]
 
 class Manager():
+  
   def __init__( self ):
     self._levels  = [ level( )  ] * 9
     self._players = []
     for i in range(4):
-      self._players.append(Player( 0, (i*10,i*10) ) )
+      self._players.append(Player( 0, (i*100,i*100) ) )
     self._screens = [ pygame.Surface((512,512)) ] * 4
   
   def update( self, keymap ):
@@ -60,8 +62,19 @@ class Manager():
           d.append(player_keymap[i][key])
       
       player.update_controls( d )
-      player.update_physics( [] )
-      player.execute_update( )
+      
+      w = []
+      for j in range(4):
+        if j == i:
+          continue
+        #w.append(self._players[j])
+      
+      level = self._levels[player.level]
+      
+      #w.extend(level.collision(player.x,player.y))
+      
+      player.update_physics( w )
+      player.execute_update(  )
     
     
   def draw( self, screen ):
@@ -81,7 +94,11 @@ class Manager():
           subsubscreen.blit(wall_image,(x,y))
         elif point_type == 4:
           subsubscreen.blit(wall_image,(x,y))
-      r = player.varg*180/math.pi
+      for j,player2 in enumerate(self._players):
+        if j == i:
+          continue
+        subsubscreen.blit(player_image,(256 + player2.x - player.x, 256 + player2.y - player.y) )
+      r = player.varg*180/math.pi + 90 
       subsubscreen = pygame.transform.rotate(subsubscreen, r)
       new_rect = subsubscreen.get_rect()
       draw_x = (-new_rect.h + 1024)/2 - 256

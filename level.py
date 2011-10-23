@@ -88,8 +88,8 @@ class level(object):
           value = self._holes_progress[(x, y)]
         elif self._holes[x][y]:
           value = HOLE_TYPE
-        xprime = element_x * math.cos(rotation) - y * math.sin(rotation)
-        yprime = element_y * math.sin(rotation) + y * math.cos(rotation)
+        xprime = element_x * math.cos(rotation) - element_y * math.sin(rotation)
+        yprime = element_x * math.sin(rotation) + element_y * math.cos(rotation)
         result[(xprime, yprime)] = value
     return result
 
