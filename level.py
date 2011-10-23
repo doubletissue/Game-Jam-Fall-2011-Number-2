@@ -26,9 +26,8 @@ class level(object):
     self._obstacles[x][y] = True
 	
   def collision(self, x, y):
-    if self._obstacles[x][y] == True:
+    if self._obstacles[x][y] is True or self._holes[x][y] is True:
       return True
-    if self._holes[x][y] == True:
-      return True
-    return False
+    else:
+      return False
 
