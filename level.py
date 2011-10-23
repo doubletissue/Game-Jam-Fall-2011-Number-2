@@ -1,9 +1,6 @@
 from __future__ import division
 import random
 
-# Christian Johnson
-# Christopher Thomas
-
 #GLOBAL VARS
 PROB_HOLES = .7
 
