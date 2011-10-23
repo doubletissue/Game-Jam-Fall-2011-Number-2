@@ -19,13 +19,13 @@ class level(object):
       self.placeObstacle(i, 0)
       self.placeObstacle(i, 127)
 
-  def update():
+  def update(self):
     pass
 
-  def placeObstacle(x, y):
+  def placeObstacle(self, x, y):
     self._obstacles[x][y] = True
 	
-  def collision(x, y):
+  def collision(self, x, y):
     if self._obstacles[x][y] == True:
       return True
     if self._holes[x][y] == True:
