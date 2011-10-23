@@ -23,6 +23,10 @@ class PhysicsObject(object):
     self.bottom = self.y + self.sizey/2
     self.left = self.x - self.sizex/2
     self.right = self.x + self.sizex/2
+    self.next_top = self.top
+    self.next_bottom = self.bottom
+    self.next_left = self.left
+    self.next_right = self.right
 
   def __str__( self ):
     return "x: {0}, y: {1}; vmag: {2}, varg: {3}".format( self.x, self.y, self.vmag, self.varg)
@@ -78,7 +82,7 @@ class PhysicsObject(object):
 
   def isBelow( self, other, updated=False ):
     if updated == True:
-      return self.next_top < other.next_bottom
+      return self.next_top > other.next_bottom
     return self.top > other.bottom
 
   def isLeft( self, other, updated=False ):
@@ -88,18 +92,23 @@ class PhysicsObject(object):
 
   def isRight( self, other, updated=False ):
     if updated == True:
-      return self.next_left < other.next_right
+      return self.next_left > other.next_right
     return self.left > other.right
 
   def intersect( self, other ):
-    if not self.isAbove( other ) and not self.isBelow( other ) and not self.isLeft( other ) and not self.isRight( other ):
+    if not self.isAbove( other, True ) and not self.isBelow( other, True ) and not self.isLeft( other, True ) and not self.isRight( other, True ):
+      print "Collision"
       if self.isAbove( other ):
+        print "top"
         return "top"
       elif self.isBelow( other ):
+        print "top"
         return "bottom"
       elif self.isLeft( other ):
+        print "top"
         return "left"
       elif self.isRight( other ):
+        print "top"
         return "right"
     else:
       return None
