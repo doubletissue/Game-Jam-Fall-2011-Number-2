@@ -14,6 +14,23 @@ def rect_to_polar( x, y ):
   arg = arg % (2*math.pi)
   return mag, arg
 
+def sign( x ):
+  if x > 0:
+    return 1
+  else:
+    return -1
+
+def do_collision( va, vb ):
+  if vb == 0:
+    return -(va/2)
+  elif va == 0:
+    return (vb/2)
+  dv = (abs(va) + abs(vb)) / 2
+  if sign(va) == sign(vb):
+    return sign(va)*dv
+  else:
+    return -sign(va)*dv
+
 class PhysicsObject(object):
   def __init__( self, (x,y), (vmag,varg), (sizex,sizey) ):
     self.x, self.y = x,y
@@ -64,16 +81,16 @@ class PhysicsObject(object):
 
     if intersection == "top":
       #self.next_y = other.y + 16
-      selfdy = -(selfdy + otherdy)/2
+      selfdy = do_collision( selfdy, otherdy )
     elif intersection == "bottom":
       #self.next_y = other.y - 16
-      selfdy = -(selfdy + otherdy)/2
+      selfdy = do_collision( selfdy, otherdy )
     elif intersection == "left":
       #self.next_x = other.x - 16
-      selfdx = -(selfdx + otherdx)/2
+      selfdx = do_collision( selfdx, otherdx )
     elif intersection == "right":
       #self.next_x = other.x + 16
-      selfdx = -(selfdx + otherdx)/2
+      selfdx = do_collision( selfdx, otherdx )
 
     self.next_vmag, self.next_varg = rect_to_polar( selfdx, selfdy )
 
