@@ -46,7 +46,7 @@ class Manager():
     self._levels  = [ level( )  ] * 9
     self._players = []
     for i in range(4):
-      self._players.append(Player( 0, (i*100,i*100) ) )
+      self._players.append(Player( 0, (i*50+50,i*50+50) ) )
     self._screens = [ pygame.Surface((512,512)) ] * 4
   
   def update( self, keymap ):
@@ -67,7 +67,7 @@ class Manager():
       for j in range(4):
         if j == i:
           continue
-        #w.append(self._players[j])
+        w.append(self._players[j])
       
       level = self._levels[player.level]
       
@@ -75,6 +75,7 @@ class Manager():
       
       player.update_physics( w )
       player.execute_update(  )
+      print player
     
     
   def draw( self, screen ):
@@ -97,12 +98,12 @@ class Manager():
       for j,player2 in enumerate(self._players):
         if j == i:
           continue
-        subsubscreen.blit(player_image,(256 + player2.x - player.x, 256 + player2.y - player.y) )
+        subsubscreen.blit(player_image,(512 + player2.x - player.x -16, 512 + player2.y - player.y - 16) )
       r = player.varg*180/math.pi + 90 
       subsubscreen = pygame.transform.rotate(subsubscreen, r)
       new_rect = subsubscreen.get_rect()
       draw_x = (-new_rect.h + 1024)/2 - 256
       draw_y = (-new_rect.w + 1024)/2 - 256
       subscreen.blit( subsubscreen, (draw_x,draw_y) )
-      subscreen.blit(player_image,(256,256))
+      subscreen.blit(player_image,(256-16,256-16))
       screen.blit( subscreen , (0 if i < 2 else 512, 0 if i%2==0 else 512) )
