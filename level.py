@@ -30,6 +30,8 @@ class level(object):
       y = random.randint(0,127)
       self._holes[x][y] = True
       print "Placed hole at %d, %d" % (x,y)
+    else:
+      print "No hole placed"
 
   def placeObstacle(self, x, y):
     self._obstacles[x][y] = True
