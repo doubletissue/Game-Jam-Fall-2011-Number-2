@@ -4,40 +4,41 @@ import math
 MAX_VELOCITY = 25
 
 class PhysicsObject(object):
-  def __init__( self, (x,y), (dx,dy), (sizex,sizey) ):
+  def __init__( self, (x,y), (vmag,varg), (sizex,sizey) ):
     self.x, self.y = x,y
-    self.dx, self.dy = dx,dy
+    self.vmag, self.varg = vmag,varg
     self.sizex, self.sizey = sizex, sizey
     self.update_edges()
 
   def __str__( self ):
-    return "x: {}, y: {}; dx: {}, dy: {}; sizex: {}, sizey: {}".format( self.x, self.y, self.dx, self.dy, self.sizex, self.sizey )
+    return "x: {}, y: {}; vmag: {}, varg: {}; sizex: {}, sizey: {}".format( self.x, self.y, self.vmag, self.varg, self.sizex, self.sizey )
 
-  def update( self, a, dr ):
-    mag = abs(complex(self.x,self.y))
-    arg = math.atan2( self.y, self.x )
-    if self.x < 0:
-      arg = - arg
+  def start_update( self, a, darg ):
+    self.next_varg = (self.varg + darg) % 2*math.pi
 
-    #Update the angle
-    arg = (arg + dr) % 2*math.pi
+    self.next_vmag = self.vmag + a
+    if self.next_vmag > MAX_VELOCITY:
+      self.next_vmag = MAX_VELOCITY
+    if self.next_vmag < 0:
+      self.next_vmag = 0
 
-    #Update the magnitude
-    mag += a
-    if mag > MAX_VELOCITY:
-      mag = MAX_VELOCITY
+    self.next_x = self.next_vmag*math.cos(self.next_varg)
+    self.next_y = self.next_vmag*math.sin(self.next_varg)
 
-    self.next_dx = mag*math.cos(arg)
-    self.next_dy = mag*math.sin(arg)
+  def update_bounce( self, other ):
+    intersection = self.intersect( other )
+    if intersection == None:
+      return
+    if intersection in ["top", "bottom"]:
+      self.next_dy = -(self.dy + other.dy)/2
+    elif intersection in ["left", "right"]:
+      self.next_dx = -(self.dx + other.dx)/2
 
-    self.next_x = self.x + self.next_dx
-    self.next_y = self.y + self.next_dy
-
-  def do_update( self ):
+  def execute_update( self ):
     self.x = self.next_x
     self.y = self.next_y
-    self.dx = self.next_dx
-    self.dy = self.next_dy
+    self.vmag = self.next_vmag
+    self.varg = self.next_varg
     self.update_edges()
 
   def update_edges( self ):
@@ -46,16 +47,7 @@ class PhysicsObject(object):
     self.left = self.x - self.sizex/2
     self.right = self.x + self.sizex/2
 
-  def bounce( self, other ):
-    intersection = self.intersect( other )
-    if intersection == None:
-      return
-    if intersection in ["top", "bottom"]
-      self.next_dy = -(self.dy + other.dy)/2
-    elif intersection in ["left", "right"]:
-      self.next_dx = -(self.dx + other.dx)/2
-
-    def isAbove( self, other ):
+  def isAbove( self, other ):
     return self.bottom < other.top
 
   def isBelow( self, other ):
@@ -84,10 +76,14 @@ class PhysicsObject(object):
 if __name__ == "__main__":
   a = PhysicsObject( (0,0), (0,0), (0,0) )
   print a
-  a.update( 0, 0 )
+  a.start_update( 0, 0 )
+  a.execute_update()
   print a
-  a.update( 1, 0  )
+  a.start_update( 1, 0  )
+  a.execute_update()
   print a
-  a.update( 0, math.pi )
+  a.start_update( 0, math.pi )
+  a.execute_update()
   print a
-  a.update( 1, math.pi )
+  a.start_update( 1, math.pi )
+  a.execute_update()
