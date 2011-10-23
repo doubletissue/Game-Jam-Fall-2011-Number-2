@@ -3,7 +3,7 @@ from physicsobject import PhysicsObject
 import math
 
 DEFAULT_DMAG = 5
-DEFAULT_DARG = math.pi / 1800
+DEFAULT_DARG = math.pi / 6
 PLAYER_SIZEX, PLAYER_SIZEY = 32, 32
 
 class Player(PhysicsObject):
