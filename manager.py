@@ -136,3 +136,5 @@ class Manager():
       subscreen.blit( subsubscreen, (draw_x,draw_y) )
       subscreen.blit(player_image,(256-16,256-16))
       screen.blit( subscreen , (0 if i < 2 else 512, 0 if i%2==0 else 512) )
+    pygame.draw.line(screen, (100,100,100), (0,512), (1024,512), 10)
+    pygame.draw.line(screen, (100,100,100), (512,0), (512,1024), 10)
