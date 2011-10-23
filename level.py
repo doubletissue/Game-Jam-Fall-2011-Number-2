@@ -62,22 +62,22 @@ class level(object):
     result = {}
     center_x = int(center[0] / 4)
     center_y = int(center[1] / 4)
-    center_x_min = math.floor(center_x - 32 * 1.414)
+    center_x_min = math.floor(center_x - 8 * 1.414)
     if center_x_min < 0:
       center_x_min = 0
-    center_x_max = math.ceil(center_x + 32 * 1.414)
+    center_x_max = math.ceil(center_x + 8 * 1.414)
     if center_x_max > 127:
       center_x_max = 127
-    center_y_min = math.floor(center_y - 32 * 1.414)
+    center_y_min = math.floor(center_y - 8 * 1.414)
     if center_y_min < 0:
       center_y_min = 0
-    center_y_max = math.ceil(center_y + 32 * 1.414)
+    center_y_max = math.ceil(center_y + 8 * 1.414)
     if center_y_max > 127:
       center_y_max = 127
-    for x in range(int(center_x_min), int(center_x_max)):
-      for y in range(int(center_y_min), int(center_y_max)):
-        element_x = (x - center_x) * 4
-        element_y = (y - center_y) * 4
+    for x in range(int(center_x_min), int(center_x_max) + 1):
+      for y in range(int(center_y_min), int(center_y_max) + 1):
+        element_x = (x - center_x)
+        element_y = (y - center_y)
         value = 0
         if self._obstacles[x][y]:
           if x is 0 or x is 127 or y is 0 or y is 127:
