@@ -19,7 +19,6 @@ class PhysicsObject(object):
     self.x, self.y = x,y
     self.vmag, self.varg = vmag,varg
     self.sizex, self.sizey = sizex, sizey
-    self.update_edges()
 
   def __str__( self ):
     return "x: {0}, y: {1}; vmag: {2}, varg: {3}".format( self.x, self.y, self.vmag, self.varg)
@@ -37,6 +36,11 @@ class PhysicsObject(object):
 
     self.next_x, self.next_y = polar_to_rect( self.next_vmag, self.next_varg )
     self.next_x, self.next_y = self.next_x + self.x, self.next_y + self.y
+
+    self.next_top = self.y - self.sizey/2
+    self.next_bottom = self.y + self.sizey/2
+    self.next_left = self.x - self.sizex/2
+    self.next_right = self.x + self.sizex/2
 
   def update_bounce( self, other ):
     selfdx, selfdy = polar_to_rect( self.vmag, self.varg )
@@ -58,35 +62,40 @@ class PhysicsObject(object):
     self.y = self.next_y
     self.vmag = self.next_vmag
     self.varg = self.next_varg
-    self.update_edges()
+    self.top = self.next_top
+    self.bottom = self.next_bottom
+    self.left = self.next_left
+    self.right = self.next_right
 
-  def update_edges( self ):
-    self.top = self.y - self.sizey/2
-    self.bottom = self.y + self.sizey/2
-    self.left = self.x - self.sizex/2
-    self.right = self.x + self.sizex/2
-
-  def isAbove( self, other ):
+  def isAbove( self, other, updated=False ):
+    if updated == True:
+      return self.next_bottom < other.next_top
     return self.bottom < other.top
 
-  def isBelow( self, other ):
+  def isBelow( self, other, updated=False ):
+    if updated == True:
+      return self.next_top < other.next_bottom
     return self.top > other.bottom
 
-  def isLeft( self, other ):
+  def isLeft( self, other, updated=False ):
+    if updated == True:
+      return self.next_right < other.next_left
     return self.right < other.left
 
-  def isRight( self, other ):
+  def isRight( self, other, updated=False ):
+    if updated == True:
+      return self.next_left < other.next_right
     return self.left > other.right
 
   def intersect( self, other ):
     if not self.isAbove( other ) and not self.isBelow( other ) and not self.isLeft( other ) and not self.isRight( other ):
-      if self.top < other.top:
+      if self.isAbove( other ):
         return "top"
-      elif self.bottom > other.bottom:
+      elif self.isBelow( other ):
         return "bottom"
-      elif self.left < other.left:
+      elif self.isLeft( other ):
         return "left"
-      elif self.right > other.right:
+      elif self.isRight( other ):
         return "right"
     else:
       return None
