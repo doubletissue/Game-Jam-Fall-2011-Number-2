@@ -44,8 +44,9 @@ class level(object):
     
     for k, v in self._holes_progress.iteritems():
       v += 1
-      if v >= 3:
-        #print k
+      self._holes_progress[k] += 1
+      if self._holes_progress[k] >= 3:
+        print k
         self._holes[k[0]][k[1]] = True
         items_to_delete.append(k)
     

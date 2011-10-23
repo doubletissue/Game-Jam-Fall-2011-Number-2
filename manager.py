@@ -13,6 +13,8 @@ floor_image   = pygame.image.load(os.path.join("Art","ground_0.png"))
 wall_image    = pygame.image.load(os.path.join("Art","wall.png"    ))
 rock_image    = pygame.image.load(os.path.join("Art","rock.png"    ))
 player_image  = pygame.image.load(os.path.join("Art","viking_0.png"    ))
+lose_image  = pygame.image.load(os.path.join("Art","dead.png"    ))
+win_image  = pygame.image.load(os.path.join("Art","lose.png"    ))
 
 player_keymap = [
                   { K_w: 'up',
@@ -54,6 +56,8 @@ class Manager():
       level.update( )
     
     for i, player in enumerate(self._players):
+      if player.dead:
+        continue
       
       d = []
       
@@ -66,27 +70,48 @@ class Manager():
     for i, player in enumerate(self._players):
       w = []
       for j in range(4):
-        if j == i:
+        if j == i or self._players[j].dead:
           continue
         w.append(self._players[j])
-      
+      q = []
       level = self._levels[player.level]
       for l in level.collision(player.x,player.y):
         x,y,t = l
         if t == 4:
           p = PhysicsObject( (x+16,y+16), (0,0), (32,32) )
           w.append(p)
-          
+        if t == 3:
+          p = PhysicsObject( (x+16,y+16), (0,0), (32,32) )
+          q.append(p)
+          print "HOOOOOOOLE"
       player.update_physics( w )
+      player.update_falling( q )
       
     for i, player in enumerate(self._players):
       player.execute_update(  )
     
   def draw( self, screen ):
-    screen.fill((0,0,0))
+    screen.fill((0,0,0))     
+    
+    
     for i, subscreen in enumerate( self._screens ):
       subsubscreen = pygame.Surface((1024,1024))
       player = self._players[i]
+      if player.dead:
+        subscreen.blit(lose_image,(0,0))
+        screen.blit( subscreen , (0 if i < 2 else 512, 0 if i%2==0 else 512) )
+        continue
+      v = True
+      for j,player2 in enumerate(self._players):
+        if j == i:
+          continue
+        if not player2.dead:
+          v = False
+      if v:
+        subscreen.blit(win_image,(0,0))
+        screen.blit( subscreen , (0 if i < 2 else 512, 0 if i%2==0 else 512) )
+        continue
+        
       level = self._levels[player.level]
       points = level.getContents( ( player.x/32 , player.y/32 ) , 0 )
       for point_cord, point_type in points.items():
@@ -100,7 +125,7 @@ class Manager():
         elif point_type == 4:
           subsubscreen.blit(wall_image,(x,y))
       for j,player2 in enumerate(self._players):
-        if j == i:
+        if j == i or player2.dead:
           continue
         subsubscreen.blit(player_image,(512 + player2.x - player.x -16, 512 + player2.y - player.y - 16) )
       r = player.varg*180/math.pi + 90 
