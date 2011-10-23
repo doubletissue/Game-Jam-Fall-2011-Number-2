@@ -27,12 +27,17 @@ class PhysicsObject(object):
     if mag > MAX_VELOCITY:
       mag = MAX_VELOCITY
 
-    self.dx = mag*math.cos(arg)
-    self.dy = mag*math.sin(arg)
+    self.next_dx = mag*math.cos(arg)
+    self.next_dy = mag*math.sin(arg)
 
-    self.x += self.dx
-    self.y += self.dy
+    self.next_x = self.x + self.next_dx
+    self.next_y = self.y + self.next_dy
 
+  def do_update( self ):
+    self.x = self.next_x
+    self.y = self.next_y
+    self.dx = self.next_dx
+    self.dy = self.next_dy
     self.update_edges()
 
   def update_edges( self ):
@@ -41,7 +46,16 @@ class PhysicsObject(object):
     self.left = self.x - self.sizex/2
     self.right = self.x + self.sizex/2
 
-  def isAbove( self, other ):
+  def bounce( self, other ):
+    intersection = self.intersect( other )
+    if intersection == None:
+      return
+    if intersection in ["top", "bottom"]
+      self.next_dy = -(self.dy + other.dy)/2
+    elif intersection in ["left", "right"]:
+      self.next_dx = -(self.dx + other.dx)/2
+
+    def isAbove( self, other ):
     return self.bottom < other.top
 
   def isBelow( self, other ):
@@ -66,9 +80,6 @@ class PhysicsObject(object):
         return "right"
     else:
       return None
-
-  def bounce( self, other ):
-    intersection = self.intersect( other )
 
 if __name__ == "__main__":
   a = PhysicsObject( (0,0), (0,0), (0,0) )
