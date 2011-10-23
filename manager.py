@@ -75,7 +75,7 @@ class Manager():
         x,y,t = l
         if t == 4:
           p = PhysicsObject( (x,y), (0,0), (32,32) )
-          print p
+          #print p
           w.append(p)
       
       player.update_physics( w )
