@@ -50,6 +50,6 @@ if __name__ == "__main__":
 
   for i in range(10):
     a.update_controls([])
-    #a.update_physics([b])
+    a.update_physics([b])
     a.execute_update()
     print a

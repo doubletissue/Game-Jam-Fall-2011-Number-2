@@ -11,6 +11,7 @@ def rect_to_polar( x, y ):
   arg = math.atan2( y, x )
   if x < 0:
     arg = -arg
+  arg = arg % (2*math.pi)
   return mag, arg
 
 class PhysicsObject(object):
