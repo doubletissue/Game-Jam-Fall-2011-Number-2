@@ -10,6 +10,7 @@ class Player(PhysicsObject):
   def __init__( self, level, (x, y) ):
     PhysicsObject.__init__( self, (x,y), (0,0), (PLAYER_SIZEX,PLAYER_SIZEY) )
     self.level = level
+    self.dead = False
 
   def update_controls( self, player_input ):
     mag = 0
@@ -35,8 +36,7 @@ class Player(PhysicsObject):
   def update_falling( self, holes ):
     for x in holes:
       if self.intersect( x ) != None:
-        return True
-    return False
+        self.dead = True
 
 if __name__ == "__main__":
   a = Player( None, (1,1) )
