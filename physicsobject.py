@@ -19,6 +19,10 @@ class PhysicsObject(object):
     self.x, self.y = x,y
     self.vmag, self.varg = vmag,varg
     self.sizex, self.sizey = sizex, sizey
+    self.top = self.y - self.sizey/2
+    self.bottom = self.y + self.sizey/2
+    self.left = self.x - self.sizex/2
+    self.right = self.x + self.sizex/2
 
   def __str__( self ):
     return "x: {0}, y: {1}; vmag: {2}, varg: {3}".format( self.x, self.y, self.vmag, self.varg)
@@ -37,10 +41,10 @@ class PhysicsObject(object):
     self.next_x, self.next_y = polar_to_rect( self.next_vmag, self.next_varg )
     self.next_x, self.next_y = self.next_x + self.x, self.next_y + self.y
 
-    self.next_top = self.y - self.sizey/2
-    self.next_bottom = self.y + self.sizey/2
-    self.next_left = self.x - self.sizex/2
-    self.next_right = self.x + self.sizex/2
+    self.next_top = self.next_y - self.sizey/2
+    self.next_bottom = self.next_y + self.sizey/2
+    self.next_left = self.next_x - self.sizex/2
+    self.next_right = self.next_x + self.sizex/2
 
   def update_bounce( self, other ):
     selfdx, selfdy = polar_to_rect( self.vmag, self.varg )
