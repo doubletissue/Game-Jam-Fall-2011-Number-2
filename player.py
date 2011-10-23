@@ -2,8 +2,9 @@ from __future__ import division
 from physicsobject import PhysicsObject
 import math
 
-DEFAULT_DMAG = 5
-DEFAULT_DARG = math.pi / 6
+DEFAULT_DMAG = 2
+DEFAULT_DBRAKE = 0.2
+DEFAULT_DARG = math.pi / 32
 PLAYER_SIZEX, PLAYER_SIZEY = 32, 32
 
 class Player(PhysicsObject):
@@ -18,7 +19,7 @@ class Player(PhysicsObject):
     if "up" in player_input:
       mag += DEFAULT_DMAG
     if "down" in player_input:
-      mag -= DEFAULT_DMAG
+      mag -= DEFAULT_BRAKE
     if "left" in player_input:
       arg -= DEFAULT_DARG
     if "right" in player_input:
@@ -36,9 +37,9 @@ class Player(PhysicsObject):
   def update_falling( self, holes ):
     #print "SELF", self
     for x in holes:
-      print x
+      #print x
       if self.intersect( x ) != None:
-        print "DEAD"
+        #print "DEAD"
         self.dead = True
 
 if __name__ == "__main__":

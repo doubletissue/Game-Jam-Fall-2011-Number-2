@@ -2,6 +2,7 @@ from __future__ import division
 import math
 
 MAX_VELOCITY = 25
+SLOW_RATE = 0.1
 
 def polar_to_rect( mag, arg ):
   return mag*math.cos(arg), mag*math.sin(arg)
@@ -52,7 +53,7 @@ class PhysicsObject(object):
     self.next_varg = (self.varg + darg) % (2*math.pi)
 
     if a == 0:
-      a = -0.5
+      a = -SLOW_RATE
     self.next_vmag = self.vmag + a
     if self.next_vmag > MAX_VELOCITY:
       self.next_vmag = MAX_VELOCITY
