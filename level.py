@@ -16,12 +16,12 @@ class level(object):
     pass
 
   def placeObstacle(x, y):
-    self.obstacles[x][y] = True
+    self._obstacles[x][y] = True
 	
   def collision(x, y):
-    if self.obstacles[x][y] == True:
+    if self._obstacles[x][y] == True:
       return True
-    if self.holes[x][y] == True:
+    if self._holes[x][y] == True:
       return True
     return False
 
