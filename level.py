@@ -11,6 +11,11 @@ class level(object):
       for j in range(127):
         self._obstacles[i][j] = False
         self._holes[i][j] = False
+    for i in range(127):
+      self.placeObstacle(0, i)
+      self.placeObstacle(127, i)
+      self.placeObstacle(i, 0)
+      self.placeObstacle(i, 127)
 
   def update():
     pass
