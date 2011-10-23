@@ -60,8 +60,8 @@ class level(object):
 
   def getContents(self, center, rotation):
     result = {}
-    center_x = int(center[0])
-    center_y = int(center[1])
+    center_x = center[0]
+    center_y = center[1]
     center_x_min = math.floor(center_x - 8 * 1.414)
     if center_x_min < 0:
       center_x_min = 0
