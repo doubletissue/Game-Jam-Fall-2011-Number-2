@@ -48,8 +48,8 @@ if __name__ == "__main__":
 
   print "COLLIDE"
 
-  for i in range(10):
+  for i in range(15):
     a.update_controls([])
-    a.update_physics([b])
+    #a.update_physics([b])
     a.execute_update()
     print a

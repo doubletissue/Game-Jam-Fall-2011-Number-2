@@ -3,7 +3,7 @@ import math
 
 MAX_VELOCITY = 25
 
-def polar_to_rect( arg, mag ):
+def polar_to_rect( mag, arg ):
   return mag*math.cos(arg), mag*math.sin(arg)
 
 def rect_to_polar( x, y ):
