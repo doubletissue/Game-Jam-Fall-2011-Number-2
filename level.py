@@ -94,7 +94,6 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    print "Start with %d, %d" % (x, y)
     start_x = int((x) // 32) - 1
     if start_x < 0: start_x = 0
     start_y = int((y) // 32) - 1

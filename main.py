@@ -6,7 +6,7 @@ import sys,os
 
 from manager import Manager
 
-title = pygame.image.load(os.path.join("Art","title.png"))
+#title = pygame.image.load(os.path.join("Art","title.png"))
 
 def main():
   pygame.init()
@@ -18,9 +18,13 @@ def main():
   
   while True:
     clock.tick(30)
+    """
     while True:
+      
       for e in pygame.event.get():
-        
+        if e.type == KEYDOWN and e.key == K_ENTER:
+          break
+          """
     for e in pygame.event.get():
       if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
         pygame.quit()
