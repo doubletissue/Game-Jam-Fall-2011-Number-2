@@ -94,7 +94,13 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    if self._obstacles[x][y] or self._holes[x][y]:
-      return True
-    else:
-      return False
+    start_x = x / 16
+    start_y = y / 16
+    obj_list = []
+    for i in range(0, 2):
+      for j in range(0, 2):
+        if self._obstacles[start_x + i][start_y + j] or self._holes[start_x + i][start_y + j]:
+          collision_x = (start_x + i) * 16
+          collision_y = (start_y + j) * 16
+          obj_list.append((collision_x, collision_y))
+    return obj_list
