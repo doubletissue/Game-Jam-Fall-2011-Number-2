@@ -48,7 +48,7 @@ class Manager():
     self._levels  = [ level( )  ] * 9
     self._players = []
     for i in range(4):
-      self._players.append(Player( 0, (i*50+50,i*50+50) ) )
+      self._players.append(Player( 0, (2000 if i < 2 else 2100, 2000 if i%2==0 else 2100) ) )
     self._screens = [ pygame.Surface((512,512)) ] * 4
   
   def update( self, keymap ):

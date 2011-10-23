@@ -10,6 +10,8 @@ title = pygame.image.load(os.path.join("Art","title.png"))
 
 def main():
   pygame.init()
+  pygame.mixer.music.load("rematch.mp3")
+  pygame.mixer.music.play(-1)
   
   screen = pygame.display.set_mode((1024, 1024))
   clock = pygame.time.Clock()
