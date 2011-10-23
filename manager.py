@@ -74,12 +74,7 @@ class Manager():
       for l in level.collision(player.x,player.y):
         x,y,t = l
         if t == 4:
-          p = PhysicsObject( (x,y), (0,0), (32,32) )
-<<<<<<< HEAD
-          #print "WALL", p
-=======
-          #print p
->>>>>>> a17a46e883988aade5c54af6b1afd664fc823747
+          p = PhysicsObject( (x+16,y+16), (0,0), (32,32) )
           w.append(p)
           
       player.update_physics( w )
