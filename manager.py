@@ -47,9 +47,13 @@ class Manager():
       player.update_controls( )
       player.update_physics( )
   
+  def draw_subscreen(self, i):
+    pass
+    
+    
   def draw( self, screen ):
     screen.fill((0,0,0))
     
     for i, subscreen in enumerate( self._screens ):
-      subscreen.fill((0 if i==0 else 255,0 if i==1 else 255,0 if i==2 else 255))
+      self.draw_subscreen(i)
       screen.blit( subscreen , (0 if i < 2 else 512, 0 if i%2==0 else 512) )
