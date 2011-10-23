@@ -60,24 +60,24 @@ class level(object):
 
   def getContents(self, center, rotation):
     result = {}
-    center_x = int(center[0] / 4)
-    center_y = int(center[1] / 4)
-    center_x_min = math.floor(center_x - 32 * 1.414)
+    center_x = center[0]
+    center_y = center[1]
+    center_x_min = math.floor(center_x - 8 * 1.414)
     if center_x_min < 0:
       center_x_min = 0
-    center_x_max = math.ceil(center_x + 32 * 1.414)
+    center_x_max = math.ceil(center_x + 8 * 1.414)
     if center_x_max > 127:
       center_x_max = 127
-    center_y_min = math.floor(center_y - 32 * 1.414)
+    center_y_min = math.floor(center_y - 8 * 1.414)
     if center_y_min < 0:
       center_y_min = 0
-    center_y_max = math.ceil(center_y + 32 * 1.414)
+    center_y_max = math.ceil(center_y + 8 * 1.414)
     if center_y_max > 127:
       center_y_max = 127
-    for x in range(int(center_x_min), int(center_x_max)):
-      for y in range(int(center_y_min), int(center_y_max)):
-        element_x = (x - center_x) * 4
-        element_y = (y - center_y) * 4
+    for x in range(int(center_x_min), int(center_x_max) + 1):
+      for y in range(int(center_y_min), int(center_y_max) + 1):
+        element_x = (x - center_x)
+        element_y = (y - center_y)
         value = 0
         if self._obstacles[x][y]:
           if x is 0 or x is 127 or y is 0 or y is 127:
@@ -94,17 +94,17 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    start_x = x / 16
-    start_y = y / 16
+    start_x = (x // 4) - 1
+    start_y = (y // 4) - 1
     obj_list = []
-    for i in range(0, 2):
-      for j in range(0, 2):
+    for i in range(0, 4):
+      for j in range(0, 4):
         if self._obstacles[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 16
-          collision_y = (start_y + j) * 16
+          collision_x = (start_x + i) * 4
+          collision_y = (start_y + j) * 4
           obj_list.append((collision_x, collision_y, OBSTACLE_TYPE))
         if self._holes[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 16
-          collision_y = (start_y + j) * 16
+          collision_x = (start_x + i) * 4
+          collision_y = (start_y + j) * 4
           obj_list.append((collision_x, collision_y, HOLE_TYPE))
     return obj_list
