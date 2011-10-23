@@ -62,16 +62,16 @@ class level(object):
     result = {}
     center_x = center[0]
     center_y = center[1]
-    center_x_min = math.floor(center_x - 16*1.414)
+    center_x_min = math.floor(center_x - 16 * 1.414)
     if center_x_min < 0:
       center_x_min = 0
-    center_x_max = math.ceil(center_x + 16*1.414)
+    center_x_max = math.ceil(center_x + 16 * 1.414)
     if center_x_max > 127:
       center_x_max = 127
-    center_y_min = math.floor(center_y - 16*1.414)
+    center_y_min = math.floor(center_y - 16 * 1.414)
     if center_y_min < 0:
       center_y_min = 0
-    center_y_max = math.ceil(center_y + 16*1.414)
+    center_y_max = math.ceil(center_y + 16 * 1.414)
     if center_y_max > 127:
       center_y_max = 127
     for x in range(int(center_x_min), int(center_x_max)):
@@ -80,7 +80,7 @@ class level(object):
         element_y = y - center_y
         value = 0
         if self._obstacles[x][y]:
-          if x == 0 or x == 127 or y == 0 or y == 127:
+          if x is 0 or x is 511 or y is 0 or y is 511:
             value = BORDER_TYPE
           else:
             value = OBSTACLE_TYPE
