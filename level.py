@@ -1,5 +1,6 @@
 from __future__ import division
 import random
+import math
 
 #GLOBAL VARS
 PROB_HOLES = .7
