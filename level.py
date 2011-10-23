@@ -76,8 +76,8 @@ class level(object):
       center_y_max = 127
     for x in range(int(center_x_min), int(center_x_max)):
       for y in range(int(center_y_min), int(center_y_max)):
-        element_x = x - center_x
-        element_y = y - center_y
+        element_x = (x - center_x) * 4
+        element_y = (y - center_y) * 4
         value = 0
         if self._obstacles[x][y]:
           if x is 0 or x is 127 or y is 0 or y is 127:
