@@ -63,6 +63,7 @@ class Manager():
       
       player.update_controls( d )
       
+    for i, player in enumerate(self._players):
       w = []
       for j in range(4):
         if j == i:
@@ -70,12 +71,17 @@ class Manager():
         w.append(self._players[j])
       
       level = self._levels[player.level]
-      
-      #w.extend(level.collision(player.x,player.y))
+      for l in level.collision(player.x,player.y):
+        x,y,t = l
+        if t == 4:
+          p = PhysicsObject( (x,y), (0,0), (32,32) )
+          print p
+          w.append(p)
       
       player.update_physics( w )
+      
+    for i, player in enumerate(self._players):
       player.execute_update(  )
-      print player
     
     
   def draw( self, screen ):

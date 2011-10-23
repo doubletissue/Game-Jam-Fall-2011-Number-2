@@ -101,7 +101,7 @@ class level(object):
     obj_list = []
     for i in range(0, 4):
       for j in range(0, 4):
-        if start_x + i > 127 or start_y + j > 127:
+        if start_x + i + 1 > 127 or start_y + j + 1 > 127:
           continue
         if self._obstacles[start_x + i][start_y + j]:
           collision_x = (start_x + i) * 4
