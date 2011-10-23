@@ -23,6 +23,10 @@ class PhysicsObject(object):
     self.bottom = self.y + self.sizey/2
     self.left = self.x - self.sizex/2
     self.right = self.x + self.sizex/2
+    self.next_top = self.top
+    self.next_bottom = self.bottom
+    self.next_left = self.left
+    self.next_right = self.right
 
   def __str__( self ):
     return "x: {0}, y: {1}; vmag: {2}, varg: {3}".format( self.x, self.y, self.vmag, self.varg)
