@@ -63,16 +63,16 @@ class PhysicsObject(object):
     self.next_y = self.y
 
     if intersection == "top":
-      self.next_y = other.y - 32
+      self.next_y = other.y + 16
       selfdy = -(selfdy + otherdy)/2
     elif intersection == "bottom":
-      self.next_y = other.y + 32
-      selfdy = -(selfdy + otherdy)/2
+      self.next_y = other.y - 16
+      selfdy = (selfdy + otherdy)/2
     elif intersection == "left":
-      self.next_x = other.x - 32
+      self.next_x = other.x - 16
       selfdx = -(selfdx + otherdx)/2
     elif intersection == "right":
-      self.next_x = other.x + 32
+      self.next_x = other.x + 16
       selfdx = -(selfdx + otherdx)/2
 
     self.next_vmag, self.next_varg = rect_to_polar( selfdx, selfdy )
@@ -117,13 +117,13 @@ class PhysicsObject(object):
         print "top"
         return "top"
       elif self.isBelow( other ):
-        print "top"
+        print "bottom"
         return "bottom"
       elif self.isLeft( other ):
-        print "top"
+        print "left"
         return "left"
       elif self.isRight( other ):
-        print "top"
+        print "right"
         return "right"
     else:
       return None
