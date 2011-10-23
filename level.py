@@ -6,9 +6,11 @@ class level(object):
 
   def __init__(self):
     for i in range(127):
-      self._obstacles[i].append([])
-      self._holes[i].append([])
+      self._obstacles.append([])
+      self._holes.append([])
       for j in range(127):
+        self._obstacles[i].append([])
+        self._holes[i].append([])
         self._obstacles[i][j] = False
         self._holes[i][j] = False
     for i in range(127):
