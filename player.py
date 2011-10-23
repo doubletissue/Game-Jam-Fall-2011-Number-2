@@ -3,7 +3,7 @@ from physicsobject import PhysicsObject
 import math
 
 DEFAULT_DMAG = 5
-DEFAULT_DARG = math.pi / 18000
+DEFAULT_DARG = math.pi / 1800
 PLAYER_SIZEX, PLAYER_SIZEY = 32, 32
 
 class Player(PhysicsObject):
@@ -52,4 +52,5 @@ if __name__ == "__main__":
     a.update_controls([])
     a.update_physics([b])
     a.execute_update()
-    print a
+    print "A:", a
+    print "B:", b
