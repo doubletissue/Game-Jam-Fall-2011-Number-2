@@ -7,9 +7,11 @@ import random
 #GLOBAL VARS
 PROB_HOLES = .7
 
+
 class level(object):
   _obstacles = []
   _holes = []
+  _holes_progress = {}
 
   def __init__(self):
     for i in range(128):
@@ -28,10 +30,21 @@ class level(object):
     if random.random() < PROB_HOLES:
       x = random.randint(0,127)
       y = random.randint(0,127)
-      self._holes[x][y] = True
+      
+      try:
+        self._holes_progress[(x, y)] += 1
+      catch KeyError:
+        self._holes_progress[(x, y)] = 0
+        
       print "Placed hole at %d, %d" % (x,y)
     else:
       print "No hole placed"
+    
+    for k, v in self._holes_progress:
+      v += 1
+      if v >= 3:
+        self._holes[k[0]][k[1]] = True
+        del self._holes_progress[k]
 
   def placeObstacle(self, x, y):
     self._obstacles[x][y] = True
