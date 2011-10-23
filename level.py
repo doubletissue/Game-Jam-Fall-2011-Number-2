@@ -103,12 +103,12 @@ class level(object):
       for j in range(0, 5):
         try:
           if self._obstacles[start_x + i][start_y + j]:
-            collision_x = (start_x + i) * 4
-            collision_y = (start_y + j) * 4
+            collision_x = (start_x + i) * 32
+            collision_y = (start_y + j) * 32
             obj_list.append((collision_x, collision_y, OBSTACLE_TYPE))
           if self._holes[start_x + i][start_y + j]:
-            collision_x = (start_x + i) * 4
-            collision_y = (start_y + j) * 4
+            collision_x = (start_x + i) * 32
+            collision_y = (start_y + j) * 32
             obj_list.append((collision_x, collision_y, HOLE_TYPE))
         except IndexError:
           pass
