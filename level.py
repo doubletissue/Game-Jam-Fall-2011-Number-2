@@ -94,17 +94,17 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    start_x = x / 16
-    start_y = y / 16
+    start_x = x / 4
+    start_y = y / 4
     obj_list = []
     for i in range(0, 2):
       for j in range(0, 2):
         if self._obstacles[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 16
-          collision_y = (start_y + j) * 16
+          collision_x = (start_x + i) * 4
+          collision_y = (start_y + j) * 4
           obj_list.append((collision_x, collision_y, OBSTACLE_TYPE))
         if self._holes[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 16
-          collision_y = (start_y + j) * 16
+          collision_x = (start_x + i) * 4
+          collision_y = (start_y + j) * 4
           obj_list.append((collision_x, collision_y, HOLE_TYPE))
     return obj_list
