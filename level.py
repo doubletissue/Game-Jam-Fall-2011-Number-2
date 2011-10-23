@@ -94,21 +94,24 @@ class level(object):
     return result
 
   def collision(self, x, y):
-    start_x = (int(x) // 4) - 1
+    print "Start with %d, %d" % (x, y)
+    start_x = int((x) // 32) - 1
     if start_x < 0: start_x = 0
-    start_y = (int(y) // 4) - 1
+    start_y = int((y) // 32) - 1
     if start_y < 0: start_y = 0
     obj_list = []
-    for i in range(0, 4):
-      for j in range(0, 4):
-        if start_x + i + 1 > 127 or start_y + j + 1 > 127:
-          continue
-        if self._obstacles[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 4
-          collision_y = (start_y + j) * 4
-          obj_list.append((collision_x, collision_y, OBSTACLE_TYPE))
-        if self._holes[start_x + i][start_y + j]:
-          collision_x = (start_x + i) * 4
-          collision_y = (start_y + j) * 4
-          obj_list.append((collision_x, collision_y, HOLE_TYPE))
+    for i in range(0, 5):
+      for j in range(0, 5):
+        try:
+          if self._obstacles[start_x + i][start_y + j]:
+            collision_x = (start_x + i) * 4
+            collision_y = (start_y + j) * 4
+            obj_list.append((collision_x, collision_y, OBSTACLE_TYPE))
+          if self._holes[start_x + i][start_y + j]:
+            collision_x = (start_x + i) * 4
+            collision_y = (start_y + j) * 4
+            obj_list.append((collision_x, collision_y, HOLE_TYPE))
+        except IndexError:
+          print "IndexError"
+          pass
     return obj_list
