@@ -92,14 +92,20 @@ class PhysicsObject(object):
     return self.left > other.right
 
   def intersect( self, other ):
-    if not self.isAbove( other ) and not self.isBelow( other ) and not self.isLeft( other ) and not self.isRight( other ):
+    print self.isAbove( other, True ), self.isBelow( other, True ), self.isLeft( other, True ), self.isRight( other, True )
+    if not self.isAbove( other, True ) and not self.isBelow( other, True ) and not self.isLeft( other, True ) and not self.isRight( other, True ):
+      print "top"
       if self.isAbove( other ):
+        print "top"
         return "top"
       elif self.isBelow( other ):
+        print "top"
         return "bottom"
       elif self.isLeft( other ):
+        print "top"
         return "left"
       elif self.isRight( other ):
+        print "top"
         return "right"
     else:
       return None
