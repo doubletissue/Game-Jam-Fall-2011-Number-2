@@ -9,4 +9,5 @@ class levelsetup:
       nLevel.placeObstacle(127, i)
       nLevel.placeObstacle(i, 0)
       nLevel.placeObstacle(i, 127)
+    return nLevel
 
