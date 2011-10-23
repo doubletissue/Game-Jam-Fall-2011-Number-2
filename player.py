@@ -26,7 +26,10 @@ class Player(PhysicsObject):
     self.start_update( mag, arg )
 
   def update_physics( self, physicsobjects ):
+    #print physicsobjects
+    #print "UPDATING PHYSICS"
     for x in physicsobjects:
+      #print x
       self.update_bounce( x )
 
   def update_falling( self, holes ):

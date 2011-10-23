@@ -75,14 +75,13 @@ class Manager():
         x,y,t = l
         if t == 4:
           p = PhysicsObject( (x,y), (0,0), (32,32) )
-          print p
+          #print "WALL", p
           w.append(p)
-      
+          
       player.update_physics( w )
       
     for i, player in enumerate(self._players):
       player.execute_update(  )
-    
     
   def draw( self, screen ):
     screen.fill((0,0,0))
