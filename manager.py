@@ -44,7 +44,7 @@ class Manager():
     self._levels  = [ level( )  ] * 9
     self._players = []
     for i in range(4):
-      self._players.append(Player( 0, (i+100,i+100) ) )
+      self._players.append(Player( 0, (i*10,i*10) ) )
     self._screens = [ pygame.Surface((512,512)) ] * 4
   
   def update( self, keymap ):
@@ -70,7 +70,7 @@ class Manager():
       subsubscreen = pygame.Surface((1024,1024))
       player = self._players[i]
       level = self._levels[player.level]
-      points = level.getContents( ( player.x , player.y ) , 0 )
+      points = level.getContents( ( player.x/32 , player.y/32 ) , 0 )
       for point_cord, point_type in points.items():
         x,y = point_cord
         x = (x+8)*32 + 256
