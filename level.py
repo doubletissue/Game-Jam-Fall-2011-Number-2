@@ -41,3 +41,6 @@ class level(object):
       return True
     else:
       return False
+      
+  def draw(self, screen):
+    pass
