@@ -19,7 +19,7 @@ class Player(PhysicsObject):
     if "up" in player_input:
       mag += DEFAULT_DMAG
     if "down" in player_input:
-      mag -= DEFAULT_BRAKE
+      mag -= DEFAULT_DBRAKE
     if "left" in player_input:
       arg -= DEFAULT_DARG
     if "right" in player_input:
