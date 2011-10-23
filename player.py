@@ -34,6 +34,7 @@ class Player(PhysicsObject):
       self.update_bounce( x )
 
   def update_falling( self, holes ):
+    print "SELF", self
     for x in holes:
       print x
       if self.intersect( x ) != None:
