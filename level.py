@@ -3,6 +3,10 @@ import random
 
 #GLOBAL VARS
 PROB_HOLES = .7
+OBSTACLE_TYPE = 4
+HOLE_TYPE = 3
+NORMAL_TYPE = 0
+BORDER_TYPE = 5
 
 
 class level(object):
@@ -73,11 +77,14 @@ class level(object):
         element_y = y - center_y
         value = 0
         if self._obstacles[x][y]:
-          value = 4
-        else if (x, y) in self._holes_progress:
+          if x == 0 or x == 127 or y == 0 or y == 127:
+            value = BORDER_TYPE
+          else:
+            value = OBSTACLE_TYPE
+        elif (x, y) in self._holes_progress:
           value = self._holes_progress[(x, y)]
-        else if self._holes[x][y]:
-          value = 3
+        elif self._holes[x][y]:
+          value = HOLE_TYPE
         xprime = element_x * math.cos(rotation) - y * math.sin(rotation)
         yprime = element_y * math.sin(rotation) + y * math.cos(rotation)
         result[(xprime, yprime)] = value
