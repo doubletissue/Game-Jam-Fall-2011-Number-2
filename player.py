@@ -36,6 +36,7 @@ class Player(PhysicsObject):
   def update_falling( self, holes ):
     for x in holes:
       if self.intersect( x ) != None:
+        print "DEAD"
         self.dead = True
 
 if __name__ == "__main__":
