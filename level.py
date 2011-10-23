@@ -1,17 +1,19 @@
-from future import division
+from __future__ import division
 
-class level:
-  bool obstacles[128][128]
-  bool holes[128][128]
+class level(object):
+  _obstacles = []
+  _holes = []
 
   def __init__(self):
-    for i in 0 to 127:
-    for j in 0 to 127:
-      obstacles[i][j] = False
-      holes[i][j] = False
+    for i in range(127):
+      self._obstacles[i].append([])
+      self._holes[i].append([])
+      for j in range(127):
+        self._obstacles[i][j] = False
+        self._holes[i][j] = False
 
   def update():
-    # todo
+    pass
 
   def placeObstacle(x, y):
     self.obstacles[x][y] = True
