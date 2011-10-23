@@ -29,6 +29,12 @@ class Player(PhysicsObject):
     for x in physicsobjects:
       self.update_bounce( x )
 
+  def update_falling( self, holes ):
+    for x in holes:
+      if self.intersect( x ) != None:
+        return True
+    return False
+
 if __name__ == "__main__":
   a = Player( None, (1,1) )
   print a
